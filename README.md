@@ -25,6 +25,9 @@ This theme uses Bulma CSS framework. Bulma is a free, open source CSS framework 
 
 ## Changelog
 
+**1.1.4**
+* Fixed: white line in mobile devices
+
 **1.1.3**
 * Added: page templates: Full-width, Focus
 * Added: footer menu

@@ -35,7 +35,7 @@
 		<?php endif; ?>
         <div class="has-background-grey-darker py-0 px-4">
             <div class="container is-size-7 has-text-white">
-                <div class="columns">
+                <div class="columns is-marginless">
 					<?php
 					$footer_menu = wp_nav_menu( array(
 						'theme_location' => 'footer',
