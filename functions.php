@@ -9,7 +9,7 @@
 
 if ( ! defined( 'IKNOW_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'IKNOW_VERSION', '1.1.3' );
+	define( 'IKNOW_VERSION', '1.1.4' );
 }
 
 if ( ! function_exists( 'iknow_setup' ) ) :

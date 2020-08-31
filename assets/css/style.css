@@ -10150,6 +10150,11 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   font-size: 0.75rem;
 }
 
+@media screen and (max-width: 1024px) {
+  .footer .columns {
+    margin: 0;
+  }
+}
 @media screen and (max-width: 560px) {
   .nav-links .prev,
 .nav-links .next {
