@@ -30,12 +30,15 @@ function iknow_get_home_posts() {
 	if ( ! $categories ) {
 		return;
 	}
+
+	$panel_color = get_theme_mod( 'iknow_panel_color', 'is-dark' );
+
 	$out = '';
 	foreach ( $categories as $cat ) {
 		$cat_icon = apply_filters( 'iknow_category_icon', 'icon-folder-open', $cat->cat_ID );
 
 		$out .= '<div class="column is-full-tablet is-half-desktop is-one-third-widescreen">';
-		$out .= '<div class="panel  is-dark">';
+		$out .= '<div class="panel ' . esc_attr( $panel_color ) . '">';
 		$out .= '<div class="panel-heading  level is-mobile">';
 		$out .= '<div class="level-left">';
 		$out .= '<div class="level-item"><span class="' . esc_attr( $cat_icon ) . ' has-text-white"></span></div>';
@@ -120,10 +123,11 @@ function iknow_home_panel_tabs( $cat_ID ) {
 		$content .= '</div>';
 		$i ++;
 	}
-	$cat_link = get_category_link( $cat_ID );
-	$link     = '<div class="panel-block">';
-	$link     .= '<a href="' . esc_url( $cat_link ) . '" class="button is-primary is-outlined is-fullwidth ">' . esc_attr__( 'View all', 'iknow' ) . '</a>';
-	$link     .= '</div>';
+	$btn_color = get_theme_mod( 'iknow_view_btn_color', 'is-primary' );
+	$cat_link  = get_category_link( $cat_ID );
+	$link      = '<div class="panel-block">';
+	$link      .= '<a href="' . esc_url( $cat_link ) . '" class="button ' . esc_attr( $btn_color ) . ' is-outlined is-fullwidth ">' . esc_attr__( 'View all', 'iknow' ) . '</a>';
+	$link      .= '</div>';
 
 	return $header . $content . $link;
 }

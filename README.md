@@ -24,6 +24,12 @@ This theme uses Bulma CSS framework. Bulma is a free, open source CSS framework 
 - Iknow is distributed under the terms of the GNU GPL
 
 ## Changelog
+**1.2**
+* Added: Iknow Current Nav widget style options
+* Added: Navigation menu settings: shadow, background color, space, fixed menu.
+* Added: Home page settings: panel background, button 'View All' color
+* Added: Main color settings: main section background, search button color
+* Optimized: style.css
 
 **1.1.4**
 * Fixed: white line in mobile devices

@@ -86,9 +86,11 @@ class Iknow_Widget_Current_Nav extends WP_Widget {
 				array( 'parent' => $cat_parent )
 			);
 
+			$current_background = get_theme_mod( 'iknow_widget_main_color', 'has-background-link' );
+
 			$cat_icon = apply_filters( 'iknow_category_icon', 'icon-folder-open', $cat->cat_ID );
 			$url      = get_category_link( $cat->cat_ID );
-			$out      .= '<li><a class="is-active" href="' . esc_url( $url ) . '">';
+			$out      .= '<li><a class="is-active ' . esc_attr( $current_background ) . '" href="' . esc_url( $url ) . '">';
 			$out      .= '<span class="icon ' . esc_attr( $cat_icon ) . '"></span>';
 			$out      .= esc_attr( $cat->cat_name ) . '</a>';
 			if ( empty( $display_posts ) ) {
@@ -203,15 +205,21 @@ class Iknow_Widget_Current_Nav extends WP_Widget {
 			'order'       => 'DESC',
 		);
 
-		$args  = wp_parse_args( $post_arg, $defaults );
-		$posts = get_posts( $args );
-		$out   = '';
+		$args          = wp_parse_args( $post_arg, $defaults );
+		$posts         = get_posts( $args );
+		$current_color = get_theme_mod( 'iknow_widget_current_color', 'has-background-danger' );
+		$out           = '';
 		if ( $posts ) {
-			$post_icon = apply_filters( 'iknow_post_icon', 'icon-doc' );
-			$out       .= '<ul>';
+			$post_icon       = apply_filters( 'iknow_post_icon', 'icon-doc' );
+			$current_post_id = get_the_ID();
+			$out             .= '<ul>';
 			foreach ( $posts as $post ) {
 				setup_postdata( $post );
-				$out .= '<li><a href="' . esc_url( get_permalink( $post->ID ) ) . '">';
+				if ( $current_post_id === $post->ID ) {
+					$out .= '<li><a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="' . esc_attr( $current_color ) . '-light">';
+				} else {
+					$out .= '<li><a href="' . esc_url( get_permalink( $post->ID ) ) . '">';
+				}
 				$out .= '<span class="icon ' . esc_attr( $post_icon ) . '"></span>';
 				$out .= esc_attr( get_the_title( $post->ID ) ) . '</a></li>';
 			}
@@ -224,7 +232,7 @@ class Iknow_Widget_Current_Nav extends WP_Widget {
 
 	private function sanitize_post_orderby( $input ) {
 		$valid = array(
-			''          => esc_attr__( 'Date', 'iknow' ),
+			''              => esc_attr__( 'Date', 'iknow' ),
 			'title'         => esc_attr__( 'Title', 'iknow' ),
 			'comment_count' => esc_attr__( 'Comment count', 'iknow' ),
 		);

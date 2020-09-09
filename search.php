@@ -7,9 +7,11 @@
  * @since WowEstore 1.0
  */
 
-get_header(); ?>
+get_header();
+$iknow_hero_classes = apply_filters( 'iknow_hero_classes', '' );
+?>
 
-    <section class="hero is-bold is-primary">
+    <section class="hero <?php echo esc_attr( $iknow_hero_classes ); ?>">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <h1 class="title is-3 is-family-secondary is-uppercase">
@@ -31,10 +33,12 @@ get_header(); ?>
                         <div class="level-left">
                             <nav class="breadcrumb is-size-7" aria-label="breadcrumbs">
                                 <ul>
-                                    <li><a href="<?php echo esc_url(home_url()); ?>"><?php esc_html_e( 'Home', 'iknow' ); ?></a>
+                                    <li>
+                                        <a href="<?php echo esc_url( home_url() ); ?>"><?php esc_html_e( 'Home', 'iknow' ); ?></a>
                                     </li>
                                     <li class="is-active">
-                                        <a href="#" aria-current="page"><?php echo esc_html( get_search_query() ); ?></a>
+                                        <a href="#"
+                                           aria-current="page"><?php echo esc_html( get_search_query() ); ?></a>
                                     </li>
                                 </ul>
                             </nav>
@@ -47,9 +51,9 @@ get_header(); ?>
                                 <thead class="is-hidden-mobile">
                                 <th></th>
                                 <th class="has-text-right is-size-7"><?php esc_html_e( 'Comments', 'iknow' ); ?></th>
-                                <?php if ( function_exists( 'iknow_get_helpful' ) ) : ?>
+								<?php if ( function_exists( 'iknow_get_helpful' ) ) : ?>
                                     <th class="has-text-right is-size-7"><?php esc_html_e( '  Helpful', 'iknow' ); ?></th>
-                                <?php endif; ?>
+								<?php endif; ?>
 
                                 </thead>
                                 <tbody>
@@ -62,9 +66,9 @@ get_header(); ?>
                                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                     </td>
                                     <td class="has-text-right is-size-7 is-hidden-mobile"><?php echo esc_html( get_comments_number() ); ?></td>
-	                                <?php if ( function_exists( 'iknow_get_helpful' ) ) : ?>
+									<?php if ( function_exists( 'iknow_get_helpful' ) ) : ?>
                                         <td class="has-text-right has-text-weight-medium is-size-7 is-hidden-mobile"><?php iknow_get_helpful(); ?></td>
-	                                <?php endif; ?>
+									<?php endif; ?>
                                 <tr>
 									<?php endwhile; // end of the loop. ?>
 

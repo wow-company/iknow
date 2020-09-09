@@ -6,25 +6,29 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 * @var [array]
 	 */
 	private $right_class;
+
 	/**
 	 * Start Level.
-	 *
-	 * @see Walker::start_lvl()
-	 * @since 1.0.0
-	 *
-	 * @access public
 	 *
 	 * @param mixed $output Passed by reference. Used to append additional content.
 	 * @param int $depth (default: 0) Depth of page. Used for padding.
 	 * @param array $args (default: array()) Arguments.
 	 *
 	 * @return void
+	 * @see Walker::start_lvl()
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
 	 */
 
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
-		$indent = str_repeat( "\t", $depth );
-		$output .= $indent."<div class=\"navbar-dropdown ";
-		if( in_array( 'is-right', $this->right_class ) ){
+		$indent       = str_repeat( "\t", $depth );
+		$iknow_option = get_option( 'iknow_settings', '' );
+		$transparent  = ! empty( $iknow_option['menu_transparent'] ) ? ' is-boxed ' : '';
+		$output       .= $indent . "<div class=\"navbar-dropdown";
+		$output       .= $transparent;
+		if ( in_array( 'is-right', $this->right_class ) ) {
 			$output .= " is-right ";
 		}
 		$output .= "\">";
@@ -38,11 +42,6 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 	/**
 	 * Start El.
 	 *
-	 * @see Walker::start_el()
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 *
 	 * @param mixed $output Passed by reference. Used to append additional content.
 	 * @param mixed $item Menu item data object.
 	 * @param int $depth (default: 0) Depth of menu item. Used for padding.
@@ -50,9 +49,14 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 * @param int $id (default: 0) Menu item ID.
 	 *
 	 * @return void
+	 * @see Walker::start_el()
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-		$defaults = array(
+		$defaults    = array(
 			'menu'            => '',
 			'container'       => 'div',
 			'container_class' => '',
@@ -71,7 +75,7 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 			'walker'          => '',
 			'theme_location'  => '',
 		);
-		$args     	 = wp_parse_args( $args, $defaults );
+		$args        = wp_parse_args( $args, $defaults );
 		$indent      = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 		$class_names = $this->get_item_classes( $item, $args, $depth );
 		$id          = apply_filters( 'iknow_nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
@@ -84,16 +88,16 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 		//Pattern for working out how to find font awesome classes
 		$pattern = '/(fa-.*|^fas|^fab)/m';
 		//First find the classes and assign them to a new variable
-		$fa = preg_grep($pattern, $item->classes);
+		$fa = preg_grep( $pattern, $item->classes );
 		//Create string of font awesome classes
-		$fa = implode(" ",$fa);
+		$fa = implode( " ", $fa );
 		//Look for fa-show-title class
-		$the_title = strstr($fa, $show_title_class);
+		$the_title = strstr( $fa, $show_title_class );
 		///Remove class fa-show-title
-		$fa = str_replace($show_title_class,"",$fa);
+		$fa = str_replace( $show_title_class, "", $fa );
 		//Remove font awesome and is-right classes from navbar-item string
-		$class_names = str_replace(array($fa,$show_title_class,"is-right"),"",$class_names);
-		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+		$class_names       = str_replace( array( $fa, $show_title_class, "is-right" ), "", $class_names );
+		$classes           = empty( $item->classes ) ? array() : (array) $item->classes;
 		$this->right_class = $classes;
 
 		if ( ! $args['has_children'] ) {//if doesn't have children
@@ -101,28 +105,25 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 				$item_output = $args['before'];//start outputting
 				$item_output .= '<a' . $class_names . $attributes . '>';//item empty use defaults
 				if ( ! empty( $fa ) ) {//if item title is not empty
-					$item_output .= '<span class="icon"><i class="' . esc_attr($fa) . '"></i></span>';
+					$item_output .= '<span class="icon"><i class="' . esc_attr( $fa ) . '"></i></span>';
 				}
 
-				$link_title = '<span>' . apply_filters( 'iknow_the_title', $item->title, $item->ID ) . '</span>';
-				$item_output .= $args['link_before'] . trim($link_title). $args['link_after'];
+				$link_title  = '<span>' . apply_filters( 'iknow_the_title', $item->title, $item->ID ) . '</span>';
+				$item_output .= $args['link_before'] . trim( $link_title ) . $args['link_after'];
 				$item_output .= $args['after'];
-			}
-			else {
+			} else {
 				$item_output = '<hr class="navbar-divider">';//output navbar divider
 			}
 			$output .= apply_filters( 'iknow_walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-		}
-
-		else {//if does have children
+		} else {//if does have children
 			$item_output = $args['before'];//stat outputting
 			$item_output .= $indent . '<div class="navbar-item has-dropdown is-hoverable" data-target="dropdown"><!-- START DROPDOWN-->' . "\n";
 			$item_output .= '<a' . $class_names . $attributes . $id . '>';//output standard
 			if ( ! empty( $fa ) ) {//if fa  is not empty
-				$item_output .= '<span class="icon"><i class="' . esc_attr($fa) . '"></i></span>';
+				$item_output .= '<span class="icon"><i class="' . esc_attr( $fa ) . '"></i></span>';
 			}
-			$link_title = '<span>' . apply_filters( 'iknow_the_title', $item->title, $item->ID ) . '</span>';
-			$item_output .= $args['link_before'] .trim($link_title) . $args['link_after'];//remove link
+			$link_title  = '<span>' . apply_filters( 'iknow_the_title', $item->title, $item->ID ) . '</span>';
+			$item_output .= $args['link_before'] . trim( $link_title ) . $args['link_after'];//remove link
 			$item_output .= $args['after'];
 			$item_output .= '</a>';
 			$output      .= apply_filters( 'iknow_walker_nav_menu_start_el', $item_output, $item, $depth, $args );
@@ -147,11 +148,6 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 *
 	 * This method shouldn't be called directly, use the walk() method instead.
 	 *
-	 * @see Walker::start_el()
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 *
 	 * @param mixed $element Data object.
 	 * @param mixed $children_elements List of elements to continue traversing.
 	 * @param mixed $max_depth Max depth to traverse.
@@ -160,6 +156,11 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 * @param mixed $output Passed by reference. Used to append additional content.
 	 *
 	 * @return null Null on failure with no changes to parameters.
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @see Walker::start_el()
 	 */
 	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
 		if ( ! $element ) {
@@ -180,7 +181,7 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$class_names = join( ' ', apply_filters( 'iknow_nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 		if ( $args['has_children'] ) {
 			$class_names .= ' dropdown navbar-link';
-			if($depth > 0) {
+			if ( $depth > 0 ) {
 				$class_names .= ' is-arrowless';
 			}
 		}
@@ -210,6 +211,7 @@ class Iknow_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		return $attributes;
 	}
+
 	/**
 	 * Menu Fallback
 	 * =============

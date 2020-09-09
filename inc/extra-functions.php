@@ -323,10 +323,10 @@ add_filter( 'iknow_category_home_args', 'iknow_filter_categories_homepage' );
 function iknow_filter_categories_homepage( $arg ) {
 	$iknow_option = get_theme_mod( 'iknow_home', '' );
 
-	$orderby      = ! empty( $iknow_option['cat_orderby'] ) ? $iknow_option['cat_orderby'] : 'name';
-	$order        = ! empty( $iknow_option['cat_order'] ) ? $iknow_option['cat_order'] : 'ASC';
-	$exclude      = ! empty( $iknow_option['cat_exclude'] ) ? $iknow_option['cat_exclude'] : '';
-	$include      = ! empty( $iknow_option['cat_include'] ) ? $iknow_option['cat_include'] : '';
+	$orderby = ! empty( $iknow_option['cat_orderby'] ) ? $iknow_option['cat_orderby'] : 'name';
+	$order   = ! empty( $iknow_option['cat_order'] ) ? $iknow_option['cat_order'] : 'ASC';
+	$exclude = ! empty( $iknow_option['cat_exclude'] ) ? $iknow_option['cat_exclude'] : '';
+	$include = ! empty( $iknow_option['cat_include'] ) ? $iknow_option['cat_include'] : '';
 
 	$new_args = array(
 		'orderby'    => $orderby,
@@ -389,4 +389,44 @@ function iknow_the_posts_pagination() {
 	the_posts_pagination( $args );
 }
 
+function iknow_menu_nav_classes( $classes ) {
+	$iknow_option          = get_option( 'iknow_settings', '' );
+	$iknow_menu_background = get_theme_mod( 'iknow_menu_color_scheme', '' );
+	$color                 = ! empty( $iknow_menu_background ) ? ' ' . $iknow_menu_background : '';
+	$space                 = ! empty( $iknow_option['menu_space'] ) ? '' : ' is-spaced';
+	$shadow                = ! empty( $iknow_option['menu_shadow'] ) ? '' : ' has-shadow';
+	$fixed                 = ! empty( $iknow_option['menu_fixed'] ) ? ' is-fixed-top' : '';
+	$transparent           = ! empty( $iknow_option['menu_transparent'] ) ? ' is-transparent' : '';
 
+	$classes = $color . $space . $shadow . $fixed . $transparent;
+
+	return $classes;
+}
+
+add_filter( 'iknow_menu_nav_classes', 'iknow_menu_nav_classes' );
+
+
+function iknow_body_fixed_menu_class( $classes ) {
+	$iknow_option          = get_option( 'iknow_settings', '' );
+	$iknow_menu_fixed_body = ! empty( $iknow_option['menu_fixed'] ) ? ' has-navbar-fixed-top' : '';
+
+	$classes[] = $iknow_menu_fixed_body;
+
+	return $classes;
+}
+
+add_filter( 'body_class', 'iknow_body_fixed_menu_class' );
+
+
+function iknow_main_section_class( $classes ) {
+	$iknow_option     = get_option( 'iknow_home', '' );
+	$iknow_hero_color = get_theme_mod( 'iknow_home_hero_color_scheme', 'is-primary' );
+	$gradient         = ! empty( $iknow_option['hero_gradient'] ) ? '' : ' is-bold';
+	$background       = ! empty( $iknow_hero_color ) ? ' ' . $iknow_hero_color : ' is-primary';
+
+	$classes = $background . $gradient;
+	return $classes;
+
+}
+
+add_filter( 'iknow_hero_classes', 'iknow_main_section_class' );

@@ -8,15 +8,17 @@
         <link rel="pingback" href="<?php echo esc_url( get_bloginfo( 'pingback_url' ) ); ?>">
 	<?php endif; ?>
 	<?php wp_head(); ?>
+
 </head>
+
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
 <header>
 	<?php if ( ! is_404() ) : ?>
         <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'iknow' ); ?></a>
-
-        <nav class="navbar has-shadow is-spaced" role="navigation"
+		<?php $iknow_menu_classes = apply_filters('iknow_menu_nav_classes', ''); ?>
+        <nav class="navbar <?php echo esc_attr( $iknow_menu_classes ); ?>" role="navigation"
              aria-label="<?php esc_attr_e( 'Main Navigation', 'iknow' ); ?>">
             <div class="container">
                 <div class="navbar-brand">
@@ -30,7 +32,9 @@
                         </a>
 					<?php endif; ?>
 
-                    <a href="#" role="button" class="navbar-burger burger" id="navigation-burger" aria-label="<?php esc_attr_e('Menu', 'iknow'); ?>" aria-expanded="false" data-target="main-menu">
+                    <a href="#" role="button" class="navbar-burger burger" id="navigation-burger"
+                       aria-label="<?php esc_attr_e( 'Menu', 'iknow' ); ?>" aria-expanded="false"
+                       data-target="main-menu">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
