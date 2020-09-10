@@ -34,6 +34,9 @@ Iknow WordPress Theme, Copyright 2020 Wow-Company & Dmytro Lobov
 Iknow is distributed under the terms of the GNU GPL
 
 == Changelog ==
+= 1.2.1 =
+* Fixed: title size
+
 = 1.2 =
 * Added: Iknow Current Nav widget style options
 * Added: Navigation menu settings: shadow, background color, space, fixed menu.
