@@ -24,6 +24,9 @@ This theme uses Bulma CSS framework. Bulma is a free, open source CSS framework 
 - Iknow is distributed under the terms of the GNU GPL
 
 ## Changelog
+**1.2.2**
+* Fixed: section colors in the templates page: Focus,  Full-width, 404
+
 **1.2.1**
 * Fixed: title size
 

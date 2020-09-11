@@ -7,10 +7,12 @@
  * @since MyStem 1.0
  */
 
-get_header(); ?>
+get_header();
+$iknow_hero_classes = apply_filters('iknow_hero_classes', '');
+?>
 
 
-<section class="hero is-primary is-bold is-fullheight">
+<section class="hero <?php echo esc_attr($iknow_hero_classes);?> is-fullheight">
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title is-size-1">
