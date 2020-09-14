@@ -39,6 +39,9 @@ class Iknow_Widget_Current_Nav extends WP_Widget {
 			'order'       => $post_order,
 		);
 
+		$current_background = get_theme_mod( 'iknow_widget_main_color', 'has-background-link' );
+		$current_color = get_theme_mod( 'iknow_widget_current_color', 'has-background-danger' );
+
 		$display_posts = ! empty( $instance['display_posts'] ) ? '1' : '0';
 
 		$out = $args['before_widget'];
@@ -58,7 +61,7 @@ class Iknow_Widget_Current_Nav extends WP_Widget {
 			);
 
 			$parent_url     = get_category_link( $cat_parent );
-			$current_parent = ( $cat->cat_ID === $cat_parent ) ? ' class="is-active"' : '';
+			$current_parent = ( $cat->cat_ID === $cat_parent ) ? ' class="is-active ' . esc_attr( $current_background ) . '"' : ' class="' . esc_attr( $current_background ) . ' has-text-white"';
 			$parent_icon    = $child_cats ? 'icon-folder-open' : 'icon-folder';
 			$cat_icon       = apply_filters( 'iknow_category_icon', $parent_icon, $cat_parent );
 			$out            .= '<li><a' . $current_parent . ' href="' . esc_url( $parent_url ) . '">';
@@ -69,7 +72,7 @@ class Iknow_Widget_Current_Nav extends WP_Widget {
 				$out .= '<ul>';
 				foreach ( $child_cats as $child ) {
 					$cat_link = get_category_link( $child->cat_ID );
-					$current  = ( $cat->cat_ID === $child->cat_ID ) ? ' class="is-active"' : '';
+					$current  = ( $cat->cat_ID === $child->cat_ID ) ? ' class="' . esc_attr( $current_color ) . '-light "' : '';
 					$out      .= '<li><a' . $current . ' href="' . esc_url( $cat_link ) . '">';
 					$out      .= '<span class="icon icon-folder"></span>';
 					$out      .= esc_attr( $child->name ) . '</a></li>';
@@ -86,7 +89,6 @@ class Iknow_Widget_Current_Nav extends WP_Widget {
 				array( 'parent' => $cat_parent )
 			);
 
-			$current_background = get_theme_mod( 'iknow_widget_main_color', 'has-background-link' );
 
 			$cat_icon = apply_filters( 'iknow_category_icon', 'icon-folder-open', $cat->cat_ID );
 			$url      = get_category_link( $cat->cat_ID );

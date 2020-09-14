@@ -63,7 +63,7 @@ function iknow_customize_register( $wp_customize ) {
 			'is-black'   => esc_attr__( 'Black', 'iknow' ),
 			'is-dark'    => esc_attr__( 'Dark', 'iknow' ),
 			'is-light'   => esc_attr__( 'Light', 'iknow' ),
-			'is-white'   => esc_attr__( 'White', 'iknow'),
+			'is-white'   => esc_attr__( 'White', 'iknow' ),
 		),
 	) );
 
@@ -99,7 +99,7 @@ function iknow_customize_register( $wp_customize ) {
 			'is-black'   => esc_attr__( 'Black', 'iknow' ),
 			'is-dark'    => esc_attr__( 'Dark', 'iknow' ),
 			'is-light'   => esc_attr__( 'Light', 'iknow' ),
-			'is-white'   => esc_attr__( 'White', 'iknow'),
+			'is-white'   => esc_attr__( 'White', 'iknow' ),
 		),
 	) );
 
@@ -226,7 +226,7 @@ function iknow_customize_register( $wp_customize ) {
 			'is-black'   => esc_attr__( 'Black', 'iknow' ),
 			'is-dark'    => esc_attr__( 'Dark', 'iknow' ),
 			'is-light'   => esc_attr__( 'Light', 'iknow' ),
-			'is-white'   => esc_attr__( 'White', 'iknow'),
+			'is-white'   => esc_attr__( 'White', 'iknow' ),
 		),
 	) );
 
@@ -248,6 +248,17 @@ function iknow_customize_register( $wp_customize ) {
 			'is-black'   => esc_attr__( 'Black', 'iknow' ),
 			'is-dark'    => esc_attr__( 'Dark', 'iknow' ),
 		),
+	) );
+
+	$wp_customize->add_setting( 'iknow_home_post_number', array(
+		'default'           => '5',
+		'sanitize_callback' => 'iknow_sanitize_number',
+	) );
+	$wp_customize->add_control( 'iknow_home_post_number', array(
+		'type'        => 'number',
+		'label'       => esc_attr__( 'Post Number', 'iknow' ),
+		'section'     => 'iknow_home_category',
+		'description' => esc_attr__( 'Set the numbers of posts on home page.', 'iknow' ),
 	) );
 
 
@@ -347,6 +358,49 @@ function iknow_customize_register( $wp_customize ) {
 	) );
 	//endregion
 
+	$wp_customize->add_section( 'iknow_archive', array(
+		'title'    => esc_attr__( 'Archive', 'iknow' ),
+		'priority' => 10,
+		'panel'    => 'iknow_settings',
+	) );
+
+	$wp_customize->add_setting( 'iknow_archive_sort_color', array(
+		'default'           => 'is-primary',
+		'sanitize_callback' => 'iknow_sanitize_color_scheme',
+	) );
+	$wp_customize->add_control( 'iknow_archive_sort_color', array(
+		'type'    => 'select',
+		'label'   => esc_attr__( 'Sort dropdown color:', 'iknow' ),
+		'section' => 'iknow_archive',
+		'choices' => array(
+			'is-primary' => esc_attr__( 'Turquoise', 'iknow' ),
+			'is-link'    => esc_attr__( 'Blue', 'iknow' ),
+			'is-info'    => esc_attr__( 'Cyan', 'iknow' ),
+			'is-success' => esc_attr__( 'Green', 'iknow' ),
+			'is-warning' => esc_attr__( 'Yellow', 'iknow' ),
+			'is-danger'  => esc_attr__( 'Red', 'iknow' ),
+			'is-black'   => esc_attr__( 'Black', 'iknow' ),
+			'is-dark'    => esc_attr__( 'Dark', 'iknow' ),
+		),
+	) );
+
+	$wp_customize->add_setting( 'iknow_settings_sort_size', array(
+		'default'           => 'is-small',
+		'sanitize_callback' => 'iknow_sanitize_size',
+	) );
+	$wp_customize->add_control( 'iknow_settings_sort_size', array(
+		'type'    => 'select',
+		'label'   => esc_attr__( 'Sort dropdown size:', 'iknow' ),
+		'section' => 'iknow_archive',
+		'choices' => array(
+			'is-small'  => esc_attr__( 'Small', 'iknow' ),
+			'is-normal' => esc_attr__( 'Normal', 'iknow' ),
+			'is-medium' => esc_attr__( 'Medium', 'iknow' ),
+			'is-large'  => esc_attr__( 'Large', 'iknow' ),
+		),
+	) );
+
+
 	//region Footer Settings
 	$wp_customize->add_section( 'iknow_footer', array(
 		'title'    => esc_attr__( 'Footer', 'iknow' ),
@@ -371,10 +425,10 @@ function iknow_customize_register( $wp_customize ) {
 
 	//region Widget colors
 	$wp_customize->add_section( 'iknow_widget_settings', array(
-		'title'    => esc_attr__( 'Widget style', 'iknow' ),
+		'title'       => esc_attr__( 'Widget style', 'iknow' ),
 		'description' => esc_attr__( 'Style for widget "Iknow Current Nav".', 'iknow' ),
-		'priority' => 10,
-		'panel'    => 'iknow_settings',
+		'priority'    => 10,
+		'panel'       => 'iknow_settings',
 	) );
 
 	$wp_customize->add_setting( 'iknow_widget_main_color', array(
@@ -416,13 +470,12 @@ function iknow_customize_register( $wp_customize ) {
 	) );
 
 
-
 	//endregion
 }
 
 add_action( 'customize_register', 'iknow_customize_register' );
 
-function iknow_sanitize_background_scheme ($input) {
+function iknow_sanitize_background_scheme( $input ) {
 	$valid = array(
 		'has-background-primary' => esc_attr__( 'Turquoise', 'iknow' ),
 		'has-background-link'    => esc_attr__( 'Blue', 'iknow' ),
@@ -454,6 +507,21 @@ function iknow_sanitize_color_scheme( $input ) {
 		'is-dark'    => esc_attr__( 'Dark', 'iknow' ),
 		'is-light'   => esc_attr__( 'Light', 'iknow' ),
 		'is-white'   => esc_attr__( 'White', 'iknow' ),
+	);
+
+	if ( array_key_exists( $input, $valid ) ) {
+		return $input;
+	} else {
+		return '';
+	}
+}
+
+function iknow_sanitize_size( $input ) {
+	$valid = array(
+		'is-small'  => esc_attr__( 'Small', 'iknow' ),
+		'is-normal' => esc_attr__( 'Normal', 'iknow' ),
+		'is-medium' => esc_attr__( 'Medium', 'iknow' ),
+		'is-large'  => esc_attr__( 'Large', 'iknow' ),
 	);
 
 	if ( array_key_exists( $input, $valid ) ) {
@@ -497,6 +565,14 @@ function iknow_sanitize_checkbox( $input ) {
 	} else {
 		return 0;
 	}
+}
+
+function iknow_sanitize_number($number, $setting) {
+	// Ensure $number is an absolute integer (whole number, zero or greater).
+	$number = absint( $number );
+
+	// If the input is an absolute integer, return it; otherwise, return the default
+	return ( $number ? $number : $setting->default );
 }
 
 /**

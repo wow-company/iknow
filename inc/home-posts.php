@@ -86,8 +86,10 @@ function iknow_home_panel_tabs( $cat_ID ) {
 
 	$content = '';
 
+	$iknow_numberposts = get_theme_mod('iknow_home_post_number', 5);
+
 	$posts_arg = array(
-		'numberposts' => 5,
+		'numberposts' => $iknow_numberposts,
 		'category'    => $cat_ID,
 	);
 

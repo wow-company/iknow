@@ -94,19 +94,21 @@ function iknow_posts_sorter() {
 
 	$posts = ! empty( $_GET['per_page'] ) ? absint( $_GET['per_page'] ) : 'default';
 
-	$posts_arr = array(
+	$posts_arr         = array(
 		'default' => esc_attr__( 'Default', 'iknow' ),
 		'20'      => '20 ' . esc_attr__( 'Per Page', 'iknow' ),
 		'50'      => '50 ' . esc_attr__( 'Per Page', 'iknow' ),
 		'100'     => '100 ' . esc_attr__( 'Per Page', 'iknow' ),
 
 	);
+	$sort_color_scheme = get_theme_mod( 'iknow_archive_sort_color', 'is-primary' );
+	$sort_size = get_theme_mod( 'iknow_settings_sort_size', 'is-small' );
 	?>
     <form method="get" id="order" class="level-right">
         <div class="level-item">
             <div class="field">
                 <div class="control">
-                    <div class="select is-small is-primary">
+                    <div class="select <?php echo esc_attr( $sort_size ); ?> <?php echo esc_attr( $sort_color_scheme ); ?>">
                         <select name="select" class="" onchange="this.form.submit();">
 							<?php
 							foreach ( $sorter_arr as $key => $val ) {
@@ -123,7 +125,7 @@ function iknow_posts_sorter() {
         <div class="level-item">
             <div class="field">
                 <div class="control">
-                    <div class="select is-small is-primary">
+                    <div class="select <?php echo esc_attr( $sort_size ); ?> <?php echo esc_attr( $sort_color_scheme ); ?>">
                         <select name="per_page" class="" onchange="this.form.submit();">
 							<?php
 							foreach ( $posts_arr as $key => $val ) {

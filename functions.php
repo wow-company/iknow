@@ -9,7 +9,7 @@
 
 if ( ! defined( 'IKNOW_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'IKNOW_VERSION', '1.2.2' );
+	define( 'IKNOW_VERSION', '1.2.3' );
 }
 
 if ( ! function_exists( 'iknow_setup' ) ) :
@@ -174,6 +174,8 @@ function iknow_theme_info_notice_notice() {
 	$message = esc_attr__( 'Some information about WordPress theme Iknow!', 'iknow' );
 	$links   = '<a href="https://wow-estore.com/docs/about-iknow-wordpress-theme/" target="_blank">' . esc_attr__( 'Documentation', 'iknow' ) . '</a> | ';
 	$links   .= '<a href="https://wow-estore.com/docs/changelog/" target="_blank">' . esc_attr__( 'Changelog', 'iknow' ) . '</a> | ';
+	$links   .= '<a href="https://wow-estore.com/" target="_blank">' . esc_attr__( 'Pro Plugins', 'iknow' ) . '</a> | ';
+	$links   .= '<a href="https://profiles.wordpress.org/wpcalc/#content-plugins" target="_blank">' . esc_attr__( 'Free Plugins', 'iknow' ) . '</a> | ';
 	$links   .= '<a href="https://wordpress.org/support/theme/iknow/" target="_blank">' . esc_attr__( 'Support Forum', 'iknow' ) . '</a> | ';
 	$links   .= '<a href="https://wordpress.org/support/theme/iknow/reviews/#new-post" target="_blank">' . esc_attr__( 'Rate Theme on WordPress.org', 'iknow' ) . '</a> | ';
 	$links   .= '<a href="' . esc_url( wp_nonce_url( add_query_arg( 'iknow-dismiss', 'dismiss_admin_notices' ), 'iknow-dismiss-' . get_current_user_id() ) ) . '">' . esc_attr__( 'Dismiss this notice', 'iknow' ) . '</a>';
