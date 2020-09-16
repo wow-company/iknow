@@ -311,6 +311,27 @@ function iknow_customize_register( $wp_customize ) {
 	) );
 	//endregion
 
+	//region Posts
+	$wp_customize->add_section( 'iknow_posts_settings', array(
+		'title'    => esc_attr__( 'Post', 'iknow' ),
+		'priority' => 10,
+		'panel'    => 'iknow_settings',
+	) );
+
+	$wp_customize->add_setting( 'iknow_settings[featured_image]', array(
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option',
+		'default'           => 0,
+		'sanitize_callback' => 'iknow_sanitize_checkbox',
+	) );
+
+	$wp_customize->add_control( 'iknow_settings[featured_image]', array(
+		'label'   => esc_attr__( 'Disabled featured image', 'iknow' ),
+		'section' => 'iknow_posts_settings',
+		'type'    => 'checkbox',
+	) );
+	//endregion
+
 	//region Icons Settings
 	$wp_customize->add_section( 'iknow_icons_settings', array(
 		'title'    => esc_attr__( 'Icons', 'iknow' ),

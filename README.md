@@ -24,6 +24,9 @@ This theme uses Bulma CSS framework. Bulma is a free, open source CSS framework 
 - Iknow is distributed under the terms of the GNU GPL
 
 ## Changelog
+**1.2.4**
+* Added: option "Disabled featured image" for posts
+
 **1.2.3**
 * Added: option "Post Number" for iknoe home page
 * Added: options: 'Sort dropdown color', 'Sort dropdown size'

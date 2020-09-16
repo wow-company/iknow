@@ -84,7 +84,8 @@
       <workItem from="1599732057538" duration="817000" />
       <workItem from="1599822044149" duration="1091000" />
       <workItem from="1600058766868" duration="606000" />
-      <workItem from="1600059449693" duration="4928000" />
+      <workItem from="1600059449693" duration="5764000" />
+      <workItem from="1600253504542" duration="338000" />
     </task>
     <servers />
   </component>
@@ -124,10 +125,10 @@
     </state>
     <state x="328" y="17" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1598624383600" />
     <state x="461" y="164" key="SettingsEditor/1920.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1594988042771" />
-    <state x="668" y="237" width="583" height="624" key="find.popup" timestamp="1600060798620">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="475" y="162" width="555" height="566" key="find.popup" timestamp="1600253719086">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="475" y="162" width="555" height="566" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1595248178758" />
+    <state x="475" y="162" width="555" height="566" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1600253719086" />
     <state x="668" y="237" width="583" height="624" key="find.popup/1920.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1600060798620" />
     <state x="668" y="231" width="781" height="809" key="find.popup/1920.81.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1595933137076" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1600060458190">
