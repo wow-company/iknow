@@ -1,9 +1,11 @@
 # WordPress Theme Iknow
 Iknow WordPress Theme - easily create Knowledge Base, Helpdesk, Wiki and FAQ sites.
 
+![](screenshot.png)
+
 ## Description
 
-Iknow WordPress Theme has a minimalistic, responsive and mobile-friendly design. Easy and fast theme. The theme is perfect for creating Knowledge Base, Helpdesk, Wiki and FAQ websites. Ability to set custom icons for each category and tag. Manage the display of categories on the main page of the site. The integrated post rating system VoteUp/VoteDown. Breadcrumbs for easy site navigation. Custom widget to display the current navigation in a category and in a separate post. You can view the appearance and features of the theme on the site [https://wpcalc.com](https://wpcalc.com)
+Iknow WordPress Theme has a minimalistic, responsive and mobile-friendly design. Easy and fast theme. The theme is perfect for creating Knowledge Base, Helpdesk, Wiki and FAQ websites. Ability to set custom icons for each category and tag. Manage the display of categories on the main page of the site. The integrated post rating system VoteUp/VoteDown. Breadcrumbs for easy site navigation. Custom widget to display the current navigation in a category and in a separate post. You can view the appearance and features of the theme on the site [https://wow-company.com/wp-theme-iknow/](https://wow-company.com/wp-theme-iknow/)
 
 Theme only support 2 level sub-menus
 
@@ -24,6 +26,12 @@ This theme uses Bulma CSS framework. Bulma is a free, open source CSS framework 
 - Iknow is distributed under the terms of the GNU GPL
 
 ## Changelog
+**1.2.5**
+* Added: search form in the navigation menu
+* Added: Attachment page
+* Fixed: Sorter post in archive page
+* Fixed: Single page navigation
+
 **1.2.4**
 * Added: option "Disabled featured image" for posts
 

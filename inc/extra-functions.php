@@ -285,30 +285,17 @@ function iknow_gallery_output( $output, $attr, $instance ) {
 }
 
 // Filter Pagination page link
-add_filter( 'wp_link_pages_args', 'iknow_link_pages_args' );
-function iknow_link_pages_args( $parsed_args ) {
-
-	$args = array(
-		'before' => '<div class="pagination"><ul class="pagination-list">',
-		'after'  => '</ul></div>',
-
-	);
-
-	$new_parsed_args = wp_parse_args( $args, $parsed_args );
-
-	return $new_parsed_args;
-}
-
-add_filter( 'wp_link_pages_link', 'iknow_link_pages_link', 10, 2 );
 function iknow_link_pages_link( $link, $i ) {
 
-	$new_link = str_replace( 'post-page-numbers', 'pagination-link', $link );
-	$new_link = str_replace( 'current', 'is-current', $new_link );
-	$link     = '<li>' . $new_link . '</li>';
+	$new_link = str_replace( 'post-page-numbers', 'button is-black is-small', $link );
+	$new_link = str_replace( 'current', 'is-outlined', $new_link );
+	$link     = $new_link;
 
 	return $link;
 
 }
+
+add_filter( 'wp_link_pages_link', 'iknow_link_pages_link', 10, 2 );
 
 // Filter the tags link
 add_filter( 'term_links-post_tag', 'iknow_filter_tags_link', 10, 5 );
@@ -425,8 +412,34 @@ function iknow_main_section_class( $classes ) {
 	$background       = ! empty( $iknow_hero_color ) ? ' ' . $iknow_hero_color : ' is-primary';
 
 	$classes = $background . $gradient;
+
 	return $classes;
 
 }
 
 add_filter( 'iknow_hero_classes', 'iknow_main_section_class' );
+
+function iknow_get_nav_search_form() {
+	$iknow_option = get_option( 'iknow_settings', '' );
+	if ( empty( $iknow_option['menu_searchform'] ) ) {
+		return;
+	}
+	?>
+    <div class="navbar-item">
+        <form role="search" method="get" id="navsearchform" class="navsearch-form"
+              action="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<?php $iknow_form_id = rand( 100, 9999 ); ?>
+            <div class="field has-addons">
+                <div class="control has-icons-left is-expanded">
+                    <label class="screen-reader-text"
+                           for="s<?php echo absint( $iknow_form_id ); ?>"><?php esc_html_x( 'Search for:', 'label', 'iknow' ); ?></label>
+                    <input type="text" value="<?php the_search_query(); ?>" name="s"
+                           id="s<?php echo absint( $iknow_form_id ); ?>"
+                           placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'iknow' ); ?>"
+                           class="input"/><span class="icon is-small is-left"><i class="icon-search"></i></span>
+                </div>
+            </div>
+        </form>
+    </div>
+	<?php
+}

@@ -38,6 +38,7 @@ $iknow_hero_classes = apply_filters('iknow_hero_classes', '');
                             </ul>
                         </nav>
                     </div>
+	                <?php iknow_posts_sorter(); ?>
                 </div>
 
 	            <?php do_action('iknow_category_description'); ?>

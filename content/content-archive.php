@@ -8,10 +8,6 @@
  */
 ?>
 
-<div class="level is-mobile">
-    <div class="level-left"></div>
-	<?php iknow_posts_sorter(); ?>
-</div>
 <div class="box">
     <table class="table is-hoverable is-fullwidth">
         <thead class="is-hidden-mobile">

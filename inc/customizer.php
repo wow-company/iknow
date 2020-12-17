@@ -177,6 +177,19 @@ function iknow_customize_register( $wp_customize ) {
 		'type'    => 'checkbox',
 	) );
 
+	$wp_customize->add_setting( 'iknow_settings[menu_searchform]', array(
+		'capability'        => 'edit_theme_options',
+		'type'              => 'option',
+		'default'           => 0,
+		'sanitize_callback' => 'iknow_sanitize_checkbox',
+	) );
+
+	$wp_customize->add_control( 'iknow_settings[menu_searchform]', array(
+		'label'   => esc_attr__( 'Add search form to navigation menu', 'iknow' ),
+		'section' => 'iknow_navbar',
+		'type'    => 'checkbox',
+	) );
+
 	$wp_customize->add_setting( 'iknow_menu_color_scheme]', array(
 		'default'           => '',
 		'sanitize_callback' => 'iknow_sanitize_color_scheme',

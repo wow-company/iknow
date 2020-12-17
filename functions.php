@@ -172,8 +172,8 @@ function iknow_theme_info_notice_notice() {
 	}
 
 	$message = esc_attr__( 'Some information about WordPress theme Iknow!', 'iknow' );
-	$links   = '<a href="https://wow-estore.com/docs/about-iknow-wordpress-theme/" target="_blank">' . esc_attr__( 'Documentation', 'iknow' ) . '</a> | ';
-	$links   .= '<a href="https://wow-estore.com/docs/changelog/" target="_blank">' . esc_attr__( 'Changelog', 'iknow' ) . '</a> | ';
+	$links   = '<a href="https://wow-company.com/faq/category/wow-themes/iknow/" target="_blank">' . esc_attr__( 'Documentation', 'iknow' ) . '</a> | ';
+	$links   .= '<a href="https://wow-company.com/faq/wow-themes/iknow/77/" target="_blank">' . esc_attr__( 'Changelog', 'iknow' ) . '</a> | ';
 	$links   .= '<a href="https://wow-estore.com/" target="_blank">' . esc_attr__( 'Pro Plugins', 'iknow' ) . '</a> | ';
 	$links   .= '<a href="https://profiles.wordpress.org/wpcalc/#content-plugins" target="_blank">' . esc_attr__( 'Free Plugins', 'iknow' ) . '</a> | ';
 	$links   .= '<a href="https://wordpress.org/support/theme/iknow/" target="_blank">' . esc_attr__( 'Support Forum', 'iknow' ) . '</a> | ';

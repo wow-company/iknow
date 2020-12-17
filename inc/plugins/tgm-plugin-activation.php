@@ -13,7 +13,7 @@ function iknow_tgmpa_register() {
 	$plugins[] = array(
 		'name'				=> 'Iknow Extra',
 		'slug'				=> 'iknow-extra',
-		'required'			=> false,
+		'required'			=> true,
 		'force_activation'	=> false,
 	);
 

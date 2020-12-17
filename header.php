@@ -74,9 +74,10 @@
 							'fallback_cb'     => 'Iknow_Walker_Nav_Menu::fallback',
 						) );
 						?>
+                       <?php iknow_get_nav_search_form();?>
                     </div>
                 </div>
-            </div><!-- .container -->
+            </div>
         </nav>
 	<?php endif; ?>
 </header>
