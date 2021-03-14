@@ -88,8 +88,9 @@ function iknow_scripts() {
 		wp_enqueue_style( 'dashicons' );
 	}
 
-	wp_enqueue_script( 'iknow', $template_uri . '/assets/js/script' . $pre_suffix . '.js', array(), IKNOW_VERSION, true );
-
+	if ( ! iknow_is_amp() ) {
+		wp_enqueue_script( 'iknow', $template_uri . '/assets/js/script' . $pre_suffix . '.js', array(), IKNOW_VERSION, true );
+	}
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -200,3 +201,34 @@ function iknow_theme_info_dismiss_notice() {
 }
 
 add_action( 'admin_head', 'iknow_theme_info_dismiss_notice' );
+
+
+/**
+ * Checks if AMP page is rendered.
+ */
+function iknow_is_amp() {
+	return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
+}
+
+
+/**
+ * Adds amp support for menu toggle.
+ */
+function iknow_amp_menu_toggle() {
+	if ( iknow_is_amp() ) {
+		echo "[aria-expanded]=\"mainMenuExpanded? 'true' : 'false'\" ";
+		echo 'on="tap:AMP.setState({mainMenuExpanded: !mainMenuExpanded})" ';
+		echo "[class]=\"'navbar-burger' + ( mainMenuExpanded ? ' is-active' : '' )\"";
+
+	}
+}
+
+
+/**
+ * Adds amp support for mobile dropdown navigation menu.
+ */
+function iknow_amp_menu_is_toggled() {
+	if ( iknow_is_amp() ) {
+		echo "[class]=\"'navbar-menu' + ( mainMenuExpanded ? ' is-active' : '' )\"";
+	}
+}

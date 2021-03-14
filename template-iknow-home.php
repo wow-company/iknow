@@ -13,34 +13,37 @@
  */
 
 get_header();
-$iknow_hero_classes = apply_filters('iknow_hero_classes', '');
+$iknow_hero_classes = apply_filters( 'iknow_hero_classes', '' );
 ?>
-<section class="hero <?php echo esc_attr($iknow_hero_classes);?> bg-image">
-	<div class="hero-body">
-		<div class="container has-text-centered">
-			<h1 class="title is-1 is-family-secondary site-name">
+<section class="hero <?php echo esc_attr( $iknow_hero_classes ); ?> bg-image">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title is-1 is-family-secondary site-name">
 				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>
-			</h1>
-			<h2 class="subtitle site-description">
+            </h1>
+            <h2 class="subtitle site-description">
 				<?php echo esc_html( get_bloginfo( 'description' ) ); ?>
-			</h2>
+            </h2>
 			<?php get_search_form(); ?>
-		</div>
-	</div>
+        </div>
+    </div>
 </section>
 
 <section class="section" id="content">
-	<div class="container">
+    <div class="container">
 		<?php while ( have_posts() ) : the_post(); ?>
             <div class="content">
 				<?php the_content(); ?>
             </div>
 		<?php endwhile; // end of the loop. ?>
-		<div class="columns is-multiline">
-			<?php iknow_get_home_posts(); ?>
-		</div>
-	</div>
+
+        <div class="columns is-multiline">
+             <?php iknow_get_home_posts(); ?>
+        </div>
+
+    </div>
 </section>
+
 
 
 <?php get_footer(); ?>

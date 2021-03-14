@@ -50,7 +50,7 @@ function iknow_get_home_posts() {
 		$out .= '</div>';
 		$out .= '</div>';
 	}
-	echo wp_kses_post( $out );
+	echo $out;
 }
 
 
@@ -58,9 +58,9 @@ function iknow_home_panel_tabs( $cat_ID ) {
 
 
 	$elements = array(
-		'subcats'        => esc_attr__( 'Subcategories', 'iknow' ),
-		'date'           => esc_attr__( 'New', 'iknow' ),
-		'comment_count ' => esc_attr__( 'Popular', 'iknow' ),
+		'subcats'       => esc_attr__( 'Subcategories', 'iknow' ),
+		'date'          => esc_attr__( 'New', 'iknow' ),
+		'comment_count' => esc_attr__( 'Popular', 'iknow' ),
 	);
 
 	$child_cats = get_categories( array(
@@ -76,9 +76,9 @@ function iknow_home_panel_tabs( $cat_ID ) {
 	$i = 0;
 	foreach ( $elements as $key => $val ) {
 		if ( $i === 0 ) {
-			$header .= '<a class="is-active" data-tab="' . esc_attr( $key ) . '">' . esc_html( $val ) . '</a>';
+			$header .= '<a class="is-active" data-tab="' . esc_attr( $key ) . '"' . iknow_panel_toogle( $elements, $key, $cat_ID ) . '>' . esc_html( $val ) . '</a>';
 		} else {
-			$header .= '<a data-tab="' . esc_attr( $key ) . '">' . esc_html( $val ) . '</a>';
+			$header .= '<a class="" data-tab="' . esc_attr( $key ) . '"' . iknow_panel_toogle( $elements, $key, $cat_ID ) . '>' . esc_html( $val ) . ' </a>';
 		}
 		$i ++;
 	}
@@ -86,7 +86,7 @@ function iknow_home_panel_tabs( $cat_ID ) {
 
 	$content = '';
 
-	$iknow_numberposts = get_theme_mod('iknow_home_post_number', 5);
+	$iknow_numberposts = get_theme_mod( 'iknow_home_post_number', 5 );
 
 	$posts_arg = array(
 		'numberposts' => $iknow_numberposts,
@@ -96,9 +96,9 @@ function iknow_home_panel_tabs( $cat_ID ) {
 	$i = 0;
 	foreach ( $elements as $key => $val ) {
 		if ( $i === 0 ) {
-			$content .= '<div data-content="' . esc_attr( $key ) . '" class="tabs-content">';
+			$content .= '<div data-content="' . esc_attr( $key ) . '" class="tabs-content ttt"' . iknow_panel_content_toogle( $elements, $key, $cat_ID ) . '>';
 		} else {
-			$content .= '<div data-content="' . esc_attr( $key ) . '" class="tabs-content is-hidden">';
+			$content .= '<div data-content="' . esc_attr( $key ) . '" class="tabs-content is-hidden"' . iknow_panel_content_toogle( $elements, $key, $cat_ID ) . '>';
 		}
 
 		if ( $key === 'subcats' ) {
@@ -132,4 +132,23 @@ function iknow_home_panel_tabs( $cat_ID ) {
 	$link      .= '</div>';
 
 	return $header . $content . $link;
+}
+
+function iknow_panel_toogle( $elements, $key, $cat_ID ) {
+	if ( iknow_is_amp() ) {
+		$attr    = ' on="tap:AMP.setState({panelMenuExpanded_' . $cat_ID . ': \'' . $key . '\'})" ';
+		$default = array_key_exists( 'subcats', $elements ) ? 'subcats' : 'date';
+		$attr    .= "[class]=\"panelMenuExpanded_" . $cat_ID . " ? (panelMenuExpanded_" . $cat_ID . " == '" . $key . "' ? 'is-active' : '') : ('" . $key . "' == '" . $default . "' ? 'is-active' : '')\"";
+
+		return $attr;
+	}
+}
+
+function iknow_panel_content_toogle( $elements, $key, $cat_ID ) {
+	if ( iknow_is_amp() ) {
+		$default = array_key_exists( 'subcats', $elements ) ? 'subcats' : 'date';
+		$attr    = " [class]=\"panelMenuExpanded_" . $cat_ID . " ? (panelMenuExpanded_" . $cat_ID . " == '" . $key . "' ? '' : 'is-hidden') : ('" . $key . "' == '" . $default . "' ? '' : 'is-hidden')\"";
+
+		return $attr;
+	}
 }

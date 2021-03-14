@@ -34,14 +34,14 @@
 
                     <a href="#" role="button" class="navbar-burger burger" id="navigation-burger"
                        aria-label="<?php esc_attr_e( 'Menu', 'iknow' ); ?>" aria-expanded="false"
-                       data-target="main-menu">
+                       data-target="main-menu" <?php iknow_amp_menu_toggle(); ?>>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
                 </div>
 
-                <div id="main-menu" class="navbar-menu">
+                <div id="main-menu" class="navbar-menu" <?php iknow_amp_menu_is_toggled(); ?>>
                     <div class="navbar-start">
 						<?php
 						wp_nav_menu( array(

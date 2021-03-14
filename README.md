@@ -26,6 +26,9 @@ This theme uses Bulma CSS framework. Bulma is a free, open source CSS framework 
 - Iknow is distributed under the terms of the GNU GPL
 
 ## Changelog
+**1.2.6**
+* Added: support AMP
+
 **1.2.5**
 * Added: search form in the navigation menu
 * Added: Attachment page
